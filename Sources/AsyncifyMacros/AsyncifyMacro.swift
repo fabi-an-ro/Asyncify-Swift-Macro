@@ -27,14 +27,11 @@ public struct AsyncifyMacro: PeerMacro {
                     let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                     let functionArgs = remainPara.map { parameter -> String in
-                        guard
-                            let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
-                            let name = parameter.firstName.text == "_" ? parameter.secondName : parameter.firstName
-                        else {
+                        guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
                             return ""
                         }
 
-                        return "\(name): \(paraType)"
+                        return "\(parameter): \(paraType)"
                     }.joined(separator: ", ")
 
                     let calledArgs = remainPara.map {
@@ -94,14 +91,11 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                 let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                 let functionArgs = remainPara.map { parameter -> String in
-                    guard
-                        let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
-                        let name = parameter.firstName.text == "_" ? parameter.secondName : parameter.firstName
-                    else {
+                    guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
                         return ""
                     }
 
-                    return "\(name): \(paraType)"
+                    return "\(parameter): \(paraType)"
                 }.joined(separator: ", ")
 
                 let calledArgs = remainPara.map {
