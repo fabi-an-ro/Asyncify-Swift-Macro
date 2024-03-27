@@ -29,7 +29,7 @@ public struct AsyncifyMacro: PeerMacro {
                     let functionArgs = remainPara.map { parameter -> String in
                         guard
                             let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
-                            let name = parameter.firstName == .wildcardToken() ? parameter.secondName : parameter.firstName
+                            let name = parameter.firstName.text == "_" ? parameter.secondName : parameter.firstName
                         else {
                             return ""
                         }
@@ -38,7 +38,7 @@ public struct AsyncifyMacro: PeerMacro {
                     }.joined(separator: ", ")
 
                     let calledArgs = remainPara.map {
-                        guard let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName else {
+                        guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
                             return ""
                         }
 
@@ -96,7 +96,7 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                 let functionArgs = remainPara.map { parameter -> String in
                     guard
                         let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
-                        let name = parameter.firstName == .wildcardToken() ? parameter.secondName : parameter.firstName
+                        let name = parameter.firstName.text == "_" ? parameter.secondName : parameter.firstName
                     else {
                         return ""
                     }
@@ -105,7 +105,7 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                 }.joined(separator: ", ")
 
                 let calledArgs = remainPara.map {
-                    guard let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName else {
+                    guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
                         return ""
                     }
 
