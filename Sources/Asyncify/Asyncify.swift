@@ -6,7 +6,13 @@
 //
 
 @attached(peer, names: overloaded)
-public macro Asyncify() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyMacro")
+public macro AsyncifyChecked() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyCheckedMacro")
 
 @attached(peer, names: overloaded)
-public macro AsyncifyThrowing() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyThrowingMacro")
+public macro AsyncifyCheckedThrowing() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyCheckedThrowingMacro")
+
+@attached(peer, names: overloaded)
+public macro AsyncifyUnsafe() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyUnsafeMacro")
+
+@attached(peer, names: overloaded)
+public macro AsyncifyUnsafeThrowing() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyUnsafeThrowingMacro")

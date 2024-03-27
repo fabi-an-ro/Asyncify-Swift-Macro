@@ -9,12 +9,12 @@ import Asyncify
 import Foundation
 
 struct Main {
-    @Asyncify
+    @AsyncifyChecked
     private func testAdd(a: Int, b: Int, completion: @escaping (Int) -> Void) {
         completion(a + b)
     }
 
-    @AsyncifyThrowing
+    @AsyncifyCheckedThrowing
     func ff(_ a: Int, completion: (Result<Int, Error>) -> Void) {
         print("")
     }
