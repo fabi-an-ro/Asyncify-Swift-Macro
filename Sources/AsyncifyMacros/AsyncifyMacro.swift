@@ -27,20 +27,22 @@ public struct AsyncifyMacro: PeerMacro {
                     let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                     let functionArgs = remainPara.map { parameter -> String in
-                        guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else { return "" }
-
-                        return "\(parameter.firstName): \(paraType)"
-                    }.joined(separator: ", ")
-
-                    let calledArgs = remainPara.map {
                         guard
-                            let paraType = $0.type.as(IdentifierTypeSyntax.self)?.name,
-                            let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName
+                            let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
+                            let name = parameter.firstName == .wildcardToken() ? parameter.secondName : parameter.firstName
                         else {
                             return ""
                         }
 
                         return "\(name): \(paraType)"
+                    }.joined(separator: ", ")
+
+                    let calledArgs = remainPara.map {
+                        guard let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName else {
+                            return ""
+                        }
+
+                        return "\($0.firstName): \(name)"
                     }.joined(separator: ", ")
 
                     return [
@@ -92,20 +94,22 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                 let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                 let functionArgs = remainPara.map { parameter -> String in
-                    guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else { return "" }
-
-                    return "\(parameter.firstName): \(paraType)"
-                }.joined(separator: ", ")
-
-                let calledArgs = remainPara.map {
                     guard
-                        let paraType = $0.type.as(IdentifierTypeSyntax.self)?.name,
-                        let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName
+                        let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name,
+                        let name = parameter.firstName == .wildcardToken() ? parameter.secondName : parameter.firstName
                     else {
                         return ""
                     }
 
                     return "\(name): \(paraType)"
+                }.joined(separator: ", ")
+
+                let calledArgs = remainPara.map {
+                    guard let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName else {
+                        return ""
+                    }
+
+                    return "\($0.firstName): \(name)"
                 }.joined(separator: ", ")
 
                 return [
