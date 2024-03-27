@@ -14,6 +14,10 @@ struct Main {
         completion(a + b)
     }
 
+    @AsyncifyThrowing
+    func ff(a: Int, completion: (Result<Int, Error>) -> Void) {
+    }
+
     @discardableResult
     init() {
         test()

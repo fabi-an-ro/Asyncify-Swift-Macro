@@ -7,3 +7,6 @@
 
 @attached(peer, names: overloaded)
 public macro Asyncify() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyMacro")
+
+@attached(peer, names: overloaded)
+public macro AsyncifyThrowing() = #externalMacro(module: "AsyncifyMacros", type: "AsyncifyThrowingMacro")
