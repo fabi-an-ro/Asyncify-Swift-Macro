@@ -15,7 +15,8 @@ struct Main {
     }
 
     @AsyncifyThrowing
-    func ff(a: Int, completion: (Result<Int, Error>) -> Void) {
+    func ff(_ a: Int, completion: (Result<Int, Error>) -> Void) {
+        print("")
     }
 
     @discardableResult

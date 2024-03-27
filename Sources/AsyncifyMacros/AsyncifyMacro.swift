@@ -32,7 +32,16 @@ public struct AsyncifyMacro: PeerMacro {
                         return "\(parameter.firstName): \(paraType)"
                     }.joined(separator: ", ")
 
-                    let calledArgs = remainPara.map { "\($0.firstName): \($0.firstName)" }.joined(separator: ", ")
+                    let calledArgs = remainPara.map {
+                        guard
+                            let paraType = $0.type.as(IdentifierTypeSyntax.self)?.name,
+                            let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName
+                        else {
+                            return ""
+                        }
+
+                        return "\(name): \(paraType)"
+                    }.joined(separator: ", ")
 
                     return [
                     """
@@ -88,7 +97,16 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                     return "\(parameter.firstName): \(paraType)"
                 }.joined(separator: ", ")
 
-                let calledArgs = remainPara.map { "\($0.firstName): \($0.firstName)" }.joined(separator: ", ")
+                let calledArgs = remainPara.map {
+                    guard
+                        let paraType = $0.type.as(IdentifierTypeSyntax.self)?.name,
+                        let name = $0.firstName == .wildcardToken() ? $0.secondName : $0.firstName
+                    else {
+                        return ""
+                    }
+
+                    return "\(name): \(paraType)"
+                }.joined(separator: ", ")
 
                 return [
                     """
