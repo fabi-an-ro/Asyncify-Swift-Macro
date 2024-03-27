@@ -31,7 +31,7 @@ public struct AsyncifyMacro: PeerMacro {
                             return ""
                         }
 
-                        return "\(parameter): \(paraType)"
+                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                     }.joined(separator: ", ")
 
                     let calledArgs = remainPara.map {
@@ -95,7 +95,7 @@ public struct AsyncifyThrowingMacro: PeerMacro {
                         return ""
                     }
 
-                    return "\(parameter): \(paraType)"
+                    return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                 }.joined(separator: ", ")
 
                 let calledArgs = remainPara.map {
