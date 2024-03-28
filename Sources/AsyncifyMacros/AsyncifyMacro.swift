@@ -27,19 +27,19 @@ public struct AsyncifyCheckedMacro: PeerMacro {
                     let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                     let functionArgs = remainPara.map { parameter -> String in
-                        guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
-                            return ""
+                        if let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name {
+                            return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                         }
 
-                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
+                        if let closure = parameter.as(FunctionParameterSyntax.self)?.type {
+                            return "\(parameter.firstName)\(parameter.secondName ?? ""): \(closure)"
+                        }
+
+                        return ""
                     }.joined(separator: ", ")
 
                     let calledArgs = remainPara.map {
-                        guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
-                            return ""
-                        }
-
-                        return "\($0.firstName): \(name)"
+                        "\($0.firstName): \($0.secondName?.text ?? $0.firstName.text)"
                     }.joined(separator: ", ")
 
                     return [
@@ -91,19 +91,19 @@ public struct AsyncifyCheckedThrowingMacro: PeerMacro {
                 let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                 let functionArgs = remainPara.map { parameter -> String in
-                    guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
-                        return ""
+                    if let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name {
+                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                     }
 
-                    return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
+                    if let closure = parameter.as(FunctionParameterSyntax.self)?.type {
+                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(closure)"
+                    }
+
+                    return ""
                 }.joined(separator: ", ")
 
                 let calledArgs = remainPara.map {
-                    guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
-                        return ""
-                    }
-
-                    return "\($0.firstName): \(name)"
+                    "\($0.firstName): \($0.secondName?.text ?? $0.firstName.text)"
                 }.joined(separator: ", ")
 
                 return [
@@ -145,19 +145,19 @@ public struct AsyncifyUnsafeMacro: PeerMacro {
                     let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                     let functionArgs = remainPara.map { parameter -> String in
-                        guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
-                            return ""
+                        if let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name {
+                            return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                         }
 
-                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
+                        if let closure = parameter.as(FunctionParameterSyntax.self)?.type {
+                            return "\(parameter.firstName)\(parameter.secondName ?? ""): \(closure)"
+                        }
+
+                        return ""
                     }.joined(separator: ", ")
 
                     let calledArgs = remainPara.map {
-                        guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
-                            return ""
-                        }
-
-                        return "\($0.firstName): \(name)"
+                        "\($0.firstName): \($0.secondName?.text ?? $0.firstName.text)"
                     }.joined(separator: ", ")
 
                     return [
@@ -209,19 +209,19 @@ public struct AsyncifyUnsafeThrowingMacro: PeerMacro {
                 let remainPara = FunctionParameterListSyntax(parameters.dropLast())
 
                 let functionArgs = remainPara.map { parameter -> String in
-                    guard let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name else {
-                        return ""
+                    if let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name {
+                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
                     }
 
-                    return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
+                    if let closure = parameter.as(FunctionParameterSyntax.self)?.type {
+                        return "\(parameter.firstName)\(parameter.secondName ?? ""): \(closure)"
+                    }
+
+                    return ""
                 }.joined(separator: ", ")
 
                 let calledArgs = remainPara.map {
-                    guard let name = $0.firstName.text == "_" ? $0.secondName : $0.firstName else {
-                        return ""
-                    }
-
-                    return "\($0.firstName): \(name)"
+                    "\($0.firstName): \($0.secondName?.text ?? $0.firstName.text)"
                 }.joined(separator: ", ")
 
                 return [

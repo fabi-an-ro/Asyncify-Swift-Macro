@@ -15,7 +15,7 @@ struct Main {
     }
 
     @AsyncifyCheckedThrowing
-    func ff(_ a: Int, completion: (Result<Int, Error>) -> Void) {
+    func ff(_ a: Int, b c: Int, closure: @escaping (String) -> Void, completion: (Result<Int, Error>) -> Void) {
         print("")
     }
 
