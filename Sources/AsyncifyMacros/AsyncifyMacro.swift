@@ -79,7 +79,7 @@ fileprivate func createSyntax(providingPeersOf declaration: some DeclSyntaxProto
 
                 return [
                     """
-                    func \(functionDecl.name)(\(raw: args.function)) async -> \(completionType) {
+                    \(functionDecl.modifiers)func \(functionDecl.name)(\(raw: args.function)) async -> \(completionType) {
                         await \(raw: continuationString) { continuation in
                             self.\(functionDecl.name)(\(raw: args.called)) { object in
                                 continuation.resume(returning: object)
@@ -127,7 +127,7 @@ fileprivate func createThrowingSyntax(providingPeersOf declaration: some DeclSyn
 
             return [
                     """
-                    func \(functionDecl.name)(\(raw: args.function)) async throws -> \(completionType) {
+                    \(functionDecl.modifiers)func \(functionDecl.name)(\(raw: args.function)) async throws -> \(completionType) {
                         try await \(raw: continuationString) { continuation in
                             self.\(functionDecl.name)(\(raw: args.called)) { result in
                                 switch result {
