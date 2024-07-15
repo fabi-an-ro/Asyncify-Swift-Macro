@@ -44,6 +44,10 @@ fileprivate func createRemainingParameters(parameters: FunctionParameterListSynt
 
     let functionArgs = remainPara.map { parameter -> String in
         if let paraType = parameter.type.as(IdentifierTypeSyntax.self)?.name {
+            if let defaultValue = parameter.defaultValue {
+                return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)\(defaultValue)"
+            }
+
             return "\(parameter.firstName)\(parameter.secondName ?? ""): \(paraType)"
         }
 
