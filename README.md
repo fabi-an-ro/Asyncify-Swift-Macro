@@ -8,14 +8,14 @@ With checked continuation:
 
 ```swift
 @AsyncifyChecked
-private func test(a: Int, completion: @escaping (Int) -> Void) {
+private func test1(a: Int, completion: @escaping (Int) -> Void) {
     // Your code here
 }
 ```
 
 ```swift
 @AsyncifyCheckedThrowing
-func test(_ a: Int, b: Int, completion: (Result<Int, Error>) -> Void) {
+private func test2(_ a: Int, b: Int, completion: (Result<Int, Error>) -> Void) {
     // Your code here
 }
 ```
@@ -24,15 +24,25 @@ With unsafe continuation:
 
 ```swift
 @AsyncifyUnsafe
-private func test(a: Int, completion: @escaping (Int) -> Void) {
+private func test3(a: Int, completion: @escaping (Int) -> Void) {
     // Your code here
 }
 ```
 
 ```swift
 @AsyncifyUnsafeThrowing
-func test(_ a: Int, b: Int, completion: (Result<Int, Error>) -> Void) {
+private func test4(_ a: Int, b: Int, completion: (Result<Int, Error>) -> Void) {
     // Your code here
+}
+```
+
+Calling the functions:
+
+```swift
+Task {
+    let res1 = await test1(a: 10)
+    let res2 = try? await test2(10)
+...
 }
 ```
 
